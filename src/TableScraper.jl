@@ -42,13 +42,14 @@ vector of `DataFrame`s
 function scrape_tables(url, cell_transform=nodeText, header_transform=nodeText)::Vector{Table}
     result_tables = []
 
-    response::HTTP.Messages.Response =
-        try
-            response = HTTP.get(url)
-        catch e
-            println("Error when attempting to get $url. Make you are connected to the internet and the URL is accessible")
-            raise(e)
-        end
+    # response::HTTP.Messages.Response =
+    #     try
+    #         response = HTTP.get(url)
+    #     catch e
+    #         println("Error when attempting to get $url. Make you are connected to the internet and the URL is accessible")
+    #         raise(e)
+    #     end
+    response = HTTP.get(url)
 
     # the body is the html content
     parsed_html = parsehtml(String(response.body))
